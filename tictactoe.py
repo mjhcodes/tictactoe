@@ -17,12 +17,12 @@ class Game:
       display += "\n"
     return display
 
-  def move(self, x, y, player):
+  def move(self, x, y, token):
     """checks the requested space on the board; if taken, returns message; if available, places player token at specified coordinates"""
     if self.board[x][y] != ' ':
       return 'Space already taken. Please try again.'
     else:
-      self.board[x][y] = player
+      self.board[x][y] = token
 
   def calc_winner(self):
     pass
@@ -39,4 +39,5 @@ class Game:
     return self.calc_winner() or self.is_full()
 
 
-print(Game())
+board = Game()
+print(board)

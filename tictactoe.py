@@ -1,4 +1,4 @@
-# Tic Tac Toe great!
+import random
 
 class Player:
   def __init__(self, name, token):
@@ -32,4 +32,23 @@ class Game:
     """runs two methods to determine if game has concluded"""
     return self.calc_winner() or self.is_full()
 
+import random
 
+#building the board:
+
+width = 3 # the width of the board
+height = 3  # the height of the board
+
+# create a board with the given width and height
+# we'll use a list of list to represent the board
+board = []  # start with an empty list
+for i in range(height):  # loop over the rows
+    board.append([])  # append an empty row
+    for j in range(width):  # loop over the columns
+        board[i].append(' ' + "|")  # append an empty space to the board
+
+
+for i in range(height):
+    for j in range(width):
+      print(board[i][j], end=' ')  # printing the board
+    print()

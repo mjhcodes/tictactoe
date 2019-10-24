@@ -1,5 +1,3 @@
-import random
-
 class Player:
   def __init__(self, name, token):
     self.name = name
@@ -13,7 +11,11 @@ class Game:
     self.board = [[' ' for x in range(3)] for y in range(3)]
 
   def __repr__(self):
-    pass
+    display = "\n"
+    for row in self.board:
+      display += "|".join(row)
+      display += "\n"
+    return display
 
   def move(self, x, y, player):
     """checks the requested space on the board; if taken, returns message; if available, places player token at specified coordinates"""
@@ -35,3 +37,6 @@ class Game:
   def is_game_over(self):
     """runs two methods to determine if game has concluded"""
     return self.calc_winner() or self.is_full()
+
+
+print(Game())

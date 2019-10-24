@@ -15,6 +15,14 @@ class Game:
   def __repr__(self):
     pass
 
+  def printBoard(self):
+    for x in range(3):
+      print(self.board)
+
+board = Game()
+
+print (board.printBoard())
+
   def move(self, x, y, player):
     """checks the requested space on the board; if taken, returns message; if available, places player token at specified coordinates"""
     if self.board[x][y] != ' ':
@@ -35,3 +43,6 @@ class Game:
   def is_game_over(self):
     """runs two methods to determine if game has concluded"""
     return self.calc_winner() or self.is_full()
+
+# board = Game()
+

@@ -24,14 +24,14 @@ class Game:
     else:
       self.board[x][y] = token
 
-  def calc_winner(self):
-    # match = 0
-    # for x in range(3):
-    #   if self.board[x][y] = self.board[x][y]
-    #   match = match + 1
-    #   if match = 3
-    #   win
-    pass
+  # def calc_winner(self):
+  #   match = 0
+  #   for x in range(3):
+  #     if self.board[x][y] == self.board[x][y]:
+  #       match = match + 1
+  #       if match == 3:
+  #         return True
+  
 
   def is_full(self):
     """scans each row of the board and returns False, if any section is blank; otherwise, returns True"""
@@ -41,9 +41,10 @@ class Game:
     print("No more moves available. Game over.\n")
     quit()
 
-  def is_game_over(self):
-    """runs two methods to determine if game has concluded"""
-    return self.calc_winner() or self.is_full()
+  # def is_game_over(self):
+  #   """runs two methods to determine if game has concluded"""
+  #   return self.calc_winner() or self.is_full()
+
 
 # - - - - - - - END CLASSES - - - - - - - -
 

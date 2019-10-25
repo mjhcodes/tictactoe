@@ -18,7 +18,7 @@ class Game:
     return display
 
   def move(self, x, y, token):
-    """checks the requested space on the board; if taken, returns message; if available, places player token at specified coordinates"""
+    """checks the requested space on the board; if taken, prints message and returns True; if available, places player token at specified coordinates"""
     if self.board[x][y] != " ":
       print("\nSpace already taken. Please try again...\n")
       return True
@@ -51,6 +51,7 @@ class Game:
 
 
 def get_current_player(current_round, player_one, player_two):
+  """determines who is the current player based on the current round"""
   if current_round % 2 == 0:
     return player_two
   else:
@@ -79,7 +80,7 @@ def main():
 
     try:
       x = int(input(f"{current_player.name}, select your horizontal location (0-2): "))
-      y = int(input(f"Select your vertical location (0-2): "))
+      y = int(input(f"{current_player.name}, select your vertical location (0-2): "))
     except ValueError:
       print("\nNot a valid input. Please try again...\n")
       continue

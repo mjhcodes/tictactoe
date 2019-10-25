@@ -25,6 +25,12 @@ class Game:
       self.board[x][y] = token
 
   def calc_winner(self):
+    # match = 0
+    # for x in range(3):
+    #   if self.board[x][y] = self.board[x][y]
+    #   match = match + 1
+    #   if match = 3
+    #   win
     pass
 
   def is_full(self):

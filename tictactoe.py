@@ -45,7 +45,13 @@ class Game:
     """runs two methods to determine if game has concluded"""
     return self.calc_winner() or self.is_full()
 
+# - - - - - - - END CLASSES - - - - - - - -
 
+def get_current_player(current_round, player_one, player_two):
+  if current_round % 2 == 0:
+    return player_two
+  else:
+    return player_one
 
 def main():
   board = Game()
@@ -59,17 +65,24 @@ def main():
   print(f"\nOkay, {player_one.name} & {player_two.name}... let's play!")
   print(f"\nHere's the board...\n{board}")
 
+  current_round = 1
+
   while True:
+
+    current_player = get_current_player(current_round, player_one, player_two)
+
     board.is_game_over()
-    p1x = int(input(f"{player_one.name}, select your horizontal location (0-2): "))
-    p1y = int(input(f"Select your vertical location (0-2): "))
-    board.move(p1y, p1x, player_one.token)
-    print(board)
-    board.is_game_over()
-    p2x = int(input(f"{player_two.name}, select your horizontal location (0-2): "))
-    p2y = int(input(f"Select your vertical location (0-2): "))
-    board.move(p2y, p2x, player_two.token)
-    print(board)
+    x = int(input(f"{current_player.name}, select your horizontal location (0-2): "))
+    y = int(input(f"Select your vertical location (0-2): "))
+    if 0 <= x <= 2 and 0 <= y <= 2:
+      board.move(x, y, current_player.token)
+      print(board)
+    else:
+      print("\nNot a valid move. Please try again.\n")
+      continue
+
+    current_round += 1
+
 
 
 

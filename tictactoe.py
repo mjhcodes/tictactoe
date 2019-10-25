@@ -18,9 +18,10 @@ class Game:
     return display
 
   def move(self, x, y, token):
-    """checks the requested space on the board; if taken, returns message; if available, places player token at specified coordinates"""
+    """checks the requested space on the board; if taken, prints message and returns True; if available, places player token at specified coordinates"""
     if self.board[x][y] != " ":
-      return "Space already taken. Please try again."
+      print("\nSpace already taken. Please try again...\n")
+      return True
     else:
       self.board[x][y] = token
 
@@ -55,11 +56,10 @@ class Game:
     #     match = match + 1
     #     if match == 3:
     #       return True
-          
-  
-
+    pass
+      
   def is_full(self):
-    """scans each row of the board and returns False, if any section is blank; otherwise, returns True"""
+    """scans each row of the board and returns False, if any section is blank; otherwise, prints message and quits"""
     for row in self.board:
       if any(item == " " for item in row):
         return False
@@ -71,6 +71,15 @@ class Game:
     return self.calc_winner() or self.is_full()
 
 
+# - - - - - - - END CLASSES - - - - - - - -
+
+
+def get_current_player(current_round, player_one, player_two):
+  """determines who is the current player based on the current round"""
+  if current_round % 2 == 0:
+    return player_two
+  else:
+    return player_one
 
 board = Game()
 player_one = Player("Alex", "X")
@@ -92,7 +101,30 @@ board.move(2, 2, "X")
 
 print(board)
 
-board.calc_winner()
+  current_round = 1
 
+  while True:
+
+    board.is_game_over()
+
+    current_player = get_current_player(current_round, player_one, player_two)
+
+    try:
+      x = int(input(f"{current_player.name}, select your horizontal location (0-2): "))
+      y = int(input(f"{current_player.name}, select your vertical location (0-2): "))
+    except ValueError:
+      print("\nNot a valid input. Please try again...\n")
+      continue
+
+    if 0 <= x <= 2 and 0 <= y <= 2:
+      is_taken = board.move(y, x, current_player.token)
+      if is_taken == True:
+        continue
+      print(board)
+    else:
+      print("\nNot a valid move. Please try again...\n")
+      continue
+
+    current_round += 1
 
 

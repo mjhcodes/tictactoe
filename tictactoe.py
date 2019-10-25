@@ -27,36 +27,20 @@ class Game:
 
   def calc_winner(self):
     for x in range(len(self.board)):
-      if "X" in self.board[x][0] and "X" in self.board[x][1] and "X" in self.board[x][2]: #checking horizontal from 0,0 to 0,2
+      if "X" in self.board[x][0] and "X" in self.board[x][1] and "X" in self.board[x][2] or "X" in self.board[0][x] and "X" in self.board[1][x] and "X" in self.board[2][x]:
         for j in range(len(self.board)):
-          if "X" in self.board[j][0] and "X" in self.board[j][1] and "X" in self.board[j][2]: #checking horizontal from 1,0 to 1,2
-            for k in range(len(self.board)):
-              if "X" in self.board[k][0] and "X" in self.board[k][1] and "X" in self.board[k][2]: #checking horizontal from 2,0 to 2,2
-                print("win")
-              else:
-                print("lost")
+          if "X" in self.board[j][0] and "X" in self.board[j][1] and "X" in self.board[j][2]: #checking horizontal from 1,0 to 1
+            return("win")
+          else:
+            return("no")
+            
+        #     for k in range(len(self.board)):
+        #       if "X" in self.board[k][0] and "X" in self.board[k][1] and "X" in self.board[k][2] or "X" in self.board[0][k] and "X" in self.board[1][k] and "X" in self.board[2][k]: #checking horizontal from 2,0 to 2,
+              
 
-      # if "X" in self.board[x][0] and "X" in self.board[x][1] and "X" in self.board[x][2]: #checking horizontal from 0,0 to 0,2
 
-    
-            # for k in range(len(self.board)):
-            #   if "X" in self.board[k][0] and "X" in self.board[k][1] and "X" in self.board[k][2]:
-          
 
-      # print(self.board[x][x]
-    # match = 0
-    # for x in range(len(self.board)):
-    #   # if self.board[x] == self.board[x]:
-    #     match = match + 1
-    # print(match)
 
-    # match = 0
-    # for x in range(3):
-    #   if self.board[x][y] == self.board[x][y]:
-    #     match = match + 1
-    #     if match == 3:
-    #       return True
-    pass
       
   def is_full(self):
     """scans each row of the board and returns False, if any section is blank; otherwise, prints message and quits"""
@@ -85,46 +69,48 @@ board = Game()
 player_one = Player("Alex", "X")
 player_two = Player("Matt", "O")
 
-board.move(0, 0, "X")
-board.move(0, 1, "X")
-board.move(0, 2, "X")
 board.move(1, 0, "X")
 board.move(1, 1, "X")
 board.move(1, 2, "X")
-board.move(2, 0, "X")
-board.move(2, 1, "X")
-board.move(2, 2, "X")
+# board.move(0, 2, "X")
+# board.move(1, 0, "X")
+# board.move(1, 1, "X")
+# board.move(1, 2, "X")
+# board.move(2, 0, "X")
+# board.move(2, 1, "X")
+# board.move(2, 2, "X")
 
 
 # board.move(1, 0, "X")
 # board.move(0, 2, "Y")
 
 print(board)
+print(board.calc_winner())
 
-  current_round = 1
+  # current_round = 1
 
-  while True:
+  # while True:
 
-    board.is_game_over()
+  #   board.is_game_over()
 
-    current_player = get_current_player(current_round, player_one, player_two)
+  #   current_player = get_current_player(current_round, player_one, player_two)
 
-    try:
-      x = int(input(f"{current_player.name}, select your horizontal location (0-2): "))
-      y = int(input(f"{current_player.name}, select your vertical location (0-2): "))
-    except ValueError:
-      print("\nNot a valid input. Please try again...\n")
-      continue
+  #   try:
+  #     x = int(input(f"{current_player.name}, select your horizontal location (0-2): "))
+  #     y = int(input(f"{current_player.name}, select your vertical location (0-2): "))
+  #   except ValueError:
+  #     print("\nNot a valid input. Please try again...\n")
+  #     continue
 
-    if 0 <= x <= 2 and 0 <= y <= 2:
-      is_taken = board.move(y, x, current_player.token)
-      if is_taken == True:
-        continue
-      print(board)
-    else:
-      print("\nNot a valid move. Please try again...\n")
-      continue
+  #   if 0 <= x <= 2 and 0 <= y <= 2:
+  #     is_taken = board.move(y, x, current_player.token)
+  #     if is_taken == True:
+  #       continue
+  #     print(board)
+  #   else:
+  #     print("\nNot a valid move. Please try again...\n")
+  #     continue
 
-    current_round += 1
+  #   current_round += 1
 
 

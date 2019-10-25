@@ -24,13 +24,38 @@ class Game:
     else:
       self.board[x][y] = token
 
-  # def calc_winner(self):
-  #   match = 0
-  #   for x in range(3):
-  #     if self.board[x][y] == self.board[x][y]:
-  #       match = match + 1
-  #       if match == 3:
-  #         return True
+  def calc_winner(self):
+    for x in range(len(self.board)):
+      if "X" in self.board[x][0] and "X" in self.board[x][1] and "X" in self.board[x][2]: #checking horizontal from 0,0 to 0,2
+        for j in range(len(self.board)):
+          if "X" in self.board[j][0] and "X" in self.board[j][1] and "X" in self.board[j][2]: #checking horizontal from 1,0 to 1,2
+            for k in range(len(self.board)):
+              if "X" in self.board[k][0] and "X" in self.board[k][1] and "X" in self.board[k][2]: #checking horizontal from 2,0 to 2,2
+                print("win")
+              else:
+                print("lost")
+
+      # if "X" in self.board[x][0] and "X" in self.board[x][1] and "X" in self.board[x][2]: #checking horizontal from 0,0 to 0,2
+
+    
+            # for k in range(len(self.board)):
+            #   if "X" in self.board[k][0] and "X" in self.board[k][1] and "X" in self.board[k][2]:
+          
+
+      # print(self.board[x][x]
+    # match = 0
+    # for x in range(len(self.board)):
+    #   # if self.board[x] == self.board[x]:
+    #     match = match + 1
+    # print(match)
+
+    # match = 0
+    # for x in range(3):
+    #   if self.board[x][y] == self.board[x][y]:
+    #     match = match + 1
+    #     if match == 3:
+    #       return True
+          
   
 
   def is_full(self):
@@ -41,39 +66,33 @@ class Game:
     print("No more moves available. Game over.\n")
     quit()
 
-  # def is_game_over(self):
-  #   """runs two methods to determine if game has concluded"""
-  #   return self.calc_winner() or self.is_full()
+  def is_game_over(self):
+    """runs two methods to determine if game has concluded"""
+    return self.calc_winner() or self.is_full()
 
 
 
+board = Game()
+player_one = Player("Alex", "X")
+player_two = Player("Matt", "O")
 
-def main():
-  board = Game()
-
-  name_one = input("\nPlayer One - You will be 'X': What is your name? ")
-  player_one = Player(name_one, "X")
-
-  name_two = input("Player Two - You will be 'O': What is your name? ")
-  player_two = Player(name_two, "O")
-
-  print(f"\nOkay, {player_one.name} & {player_two.name}... let's play!")
-  print(f"\nHere's the board...\n{board}")
-
-  while True:
-    board.is_game_over()
-    p1x = int(input(f"{player_one.name}, select your horizontal location (0-2): "))
-    p1y = int(input(f"Select your vertical location (0-2): "))
-    board.move(p1y, p1x, player_one.token)
-    print(board)
-    board.is_game_over()
-    p2x = int(input(f"{player_two.name}, select your horizontal location (0-2): "))
-    p2y = int(input(f"Select your vertical location (0-2): "))
-    board.move(p2y, p2x, player_two.token)
-    print(board)
+board.move(0, 0, "X")
+board.move(0, 1, "X")
+board.move(0, 2, "X")
+board.move(1, 0, "X")
+board.move(1, 1, "X")
+board.move(1, 2, "X")
+board.move(2, 0, "X")
+board.move(2, 1, "X")
+board.move(2, 2, "X")
 
 
+# board.move(1, 0, "X")
+# board.move(0, 2, "Y")
 
-main()
+print(board)
+
+board.calc_winner()
+
 
 

@@ -23,15 +23,17 @@ class Game:
       return 'Space already taken. Please try again.'
     else:
       self.board[x][y] = token
+      return self.board[x][y]
 
   def calc_winner(self):
-    # match = 0
-    # for x in range(3):
-    #   if self.board[x][y] = self.board[x][y]
-    #   match = match + 1
-    #   if match = 3
-    #   win
-    pass
+    match = 0
+    for x in range(3):
+      if self.board[x][y] == self.board[x][y]:
+        match = match + 1
+        if match == 3:
+          return True
+  
+
 
   def is_full(self):
     """scans each row of the board and returns False, if any section is blank; otherwise, returns True"""
@@ -46,4 +48,12 @@ class Game:
 
 
 board = Game()
+alex = Player("Alex", "x")
+matt = Player("Matt", "y")
+
+board.move(0, 1, "X")
+board.move(1, 1, "X")
+board.move(2, 1, "X")
+
+
 print(board)

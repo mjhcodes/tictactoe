@@ -26,16 +26,31 @@ class Game:
       self.board[x][y] = token
 
   def calc_winner(self, current_player):
+    """checks for a winner, based on horizontal, vertical and diagonal directions"""
 
+    # horizontal
     for row in self.board:
-      if all(item == "X" or item == "O" for item in row):
+      if all(item == "X" for item in row) or all(item == "O" for item in row):
         print(f"{current_player.token} is the winner! Congrats, {current_player}!\n")
         quit()
 
+    # vertical
+    if (self.board[0][0] == self.board[1][0] == self.board[2][0]) and self.board[0][0] != ' ':
+      print(f"{current_player.token} is the winner! Congrats, {current_player}!\n")
+      quit()
+    elif (self.board[0][1] == self.board[1][1] == self.board[2][1]) and self.board[0][1] != ' ':
+      print(f"{current_player.token} is the winner! Congrats, {current_player}!\n")
+      quit()
+    elif (self.board[0][2] == self.board[1][2] == self.board[2][2]) and self.board[0][2] != ' ':
+      print(f"{current_player.token} is the winner! Congrats, {current_player}!\n")
+      quit()
+
+    # diagonal - top left to bottom right
     if (self.board[0][0] == self.board[1][1] == self.board[2][2]) and self.board[0][0] != ' ':
       print(f"{current_player.token} is the winner! Congrats, {current_player}!\n")
       quit()
 
+    # diagonal - bottom left to top right
     if (self.board[0][2] == self.board[1][1] == self.board[2][0]) and self.board[0][2] != ' ':
       print(f"{current_player.token} is the winner! Congrats, {current_player}!\n")
       quit()

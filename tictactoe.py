@@ -24,15 +24,26 @@ class Game:
       return True
     else:
       self.board[x][y] = token
+      
 
+  # def calc_winner(self):
+  #   for x in range(len(self.board)):
+  #     if "X" in self.board[x][0] and "X" in self.board[x][1] and "X" in self.board[x][2] or "X" in self.board[0][x] and "X" in self.board[1][x] and "X" in self.board[2][x]:
+  #       return("win")
+  #     else:
+  #       return("no")
   def calc_winner(self):
     for x in range(len(self.board)):
-      if "X" in self.board[x][0] and "X" in self.board[x][1] and "X" in self.board[x][2] or "X" in self.board[0][x] and "X" in self.board[1][x] and "X" in self.board[2][x]:
-        for j in range(len(self.board)):
-          if "X" in self.board[j][0] and "X" in self.board[j][1] and "X" in self.board[j][2]: #checking horizontal from 1,0 to 1
-            return("win")
-          else:
-            return("no")
+      for j in range(len(self.board)):
+        if self.board[j][x] == self.board[x][j]:
+          print(True)
+        else:
+          print("none")
+        # if "X" in self.board[x][0] and "X" in self.board[x][1] and "X" in self.board[x][2] or "X" in self.board[0][x] and "X" in self.board[1][x] and "X" in self.board[2][x]:
+          #   # if "X" in self.board[j][0] and "X" in self.board[j][1] and "X" in self.board[j][2] or "X" in self.board[0][j] and "X" in self.board[1][j] and "X" in self.board[2][j]:
+          #   return("win")
+          # else:
+          #  return("no")
             
         #     for k in range(len(self.board)):
         #       if "X" in self.board[k][0] and "X" in self.board[k][1] and "X" in self.board[k][2] or "X" in self.board[0][k] and "X" in self.board[1][k] and "X" in self.board[2][k]: #checking horizontal from 2,0 to 2,
@@ -69,9 +80,9 @@ board = Game()
 player_one = Player("Alex", "X")
 player_two = Player("Matt", "O")
 
-board.move(1, 0, "X")
+board.move(0, 1, "X")
 board.move(1, 1, "X")
-board.move(1, 2, "X")
+board.move(2, 1, "X")
 # board.move(0, 2, "X")
 # board.move(1, 0, "X")
 # board.move(1, 1, "X")

@@ -24,34 +24,21 @@ class Game:
       return True
     else:
       self.board[x][y] = token
-      
 
-  # def calc_winner(self):
-  #   for x in range(len(self.board)):
-  #     if "X" in self.board[x][0] and "X" in self.board[x][1] and "X" in self.board[x][2] or "X" in self.board[0][x] and "X" in self.board[1][x] and "X" in self.board[2][x]:
-  #       return("win")
-  #     else:
-  #       return("no")
-  def calc_winner(self):
-    for x in range(len(self.board)):
-      for j in range(len(self.board)):
-        if self.board[j][x] == self.board[x][j]:
-          print(True)
-        else:
-          print("none")
-        # if "X" in self.board[x][0] and "X" in self.board[x][1] and "X" in self.board[x][2] or "X" in self.board[0][x] and "X" in self.board[1][x] and "X" in self.board[2][x]:
-          #   # if "X" in self.board[j][0] and "X" in self.board[j][1] and "X" in self.board[j][2] or "X" in self.board[0][j] and "X" in self.board[1][j] and "X" in self.board[2][j]:
-          #   return("win")
-          # else:
-          #  return("no")
-            
-        #     for k in range(len(self.board)):
-        #       if "X" in self.board[k][0] and "X" in self.board[k][1] and "X" in self.board[k][2] or "X" in self.board[0][k] and "X" in self.board[1][k] and "X" in self.board[2][k]: #checking horizontal from 2,0 to 2,
-              
+  def calc_winner(self, current_player):
 
+    for row in self.board:
+      if all(item == "X" or item == "O" for item in row):
+        print(f"{current_player.token} is the winner! Congrats, {current_player}!\n")
+        quit()
 
+    if (self.board[0][0] == self.board[1][1] == self.board[2][2]) and self.board[0][0] != ' ':
+      print(f"{current_player.token} is the winner! Congrats, {current_player}!\n")
+      quit()
 
-
+    if (self.board[0][2] == self.board[1][1] == self.board[2][0]) and self.board[0][2] != ' ':
+      print(f"{current_player.token} is the winner! Congrats, {current_player}!\n")
+      quit()
       
   def is_full(self):
     """scans each row of the board and returns False, if any section is blank; otherwise, prints message and quits"""
@@ -61,9 +48,9 @@ class Game:
     print("No more moves available. Game over.\n")
     quit()
 
-  def is_game_over(self):
+  def is_game_over(self, current_player):
     """runs two methods to determine if game has concluded"""
-    return self.calc_winner() or self.is_full()
+    return self.calc_winner(current_player) or self.is_full()
 
 
 # - - - - - - - END CLASSES - - - - - - - -
@@ -76,52 +63,44 @@ def get_current_player(current_round, player_one, player_two):
   else:
     return player_one
 
-board = Game()
-player_one = Player("Alex", "X")
-player_two = Player("Matt", "O")
+def main():
+  board = Game()
 
-board.move(0, 1, "X")
-board.move(1, 1, "X")
-board.move(2, 1, "X")
-# board.move(0, 2, "X")
-# board.move(1, 0, "X")
-# board.move(1, 1, "X")
-# board.move(1, 2, "X")
-# board.move(2, 0, "X")
-# board.move(2, 1, "X")
-# board.move(2, 2, "X")
+  name_one = input("\nPlayer One - You will be 'X': What is your name? ")
+  player_one = Player(name_one, "X")
+
+  name_two = input("Player Two - You will be 'O': What is your name? ")
+  player_two = Player(name_two, "O")
+
+  print(f"\nOkay, {player_one.name} & {player_two.name}... let's play!")
+  print(f"\nHere's the board...\n{board}")
+
+  current_round = 1
+
+  while True:
+
+    current_player = get_current_player(current_round, player_one, player_two)
+
+    try:
+      x = int(input(f"{current_player.name}, select your horizontal location (0-2): "))
+      y = int(input(f"{current_player.name}, select your vertical location (0-2): "))
+    except ValueError:
+      print("\nNot a valid input. Please try again...\n")
+      continue
+
+    if 0 <= x <= 2 and 0 <= y <= 2:
+      is_taken = board.move(y, x, current_player.token)
+      if is_taken == True:
+        continue
+      print(board)
+    else:
+      print("\nNot a valid move. Please try again...\n")
+      continue
+
+    board.is_game_over(current_player)
+
+    current_round += 1
 
 
-# board.move(1, 0, "X")
-# board.move(0, 2, "Y")
-
-print(board)
-print(board.calc_winner())
-
-  # current_round = 1
-
-  # while True:
-
-  #   board.is_game_over()
-
-  #   current_player = get_current_player(current_round, player_one, player_two)
-
-  #   try:
-  #     x = int(input(f"{current_player.name}, select your horizontal location (0-2): "))
-  #     y = int(input(f"{current_player.name}, select your vertical location (0-2): "))
-  #   except ValueError:
-  #     print("\nNot a valid input. Please try again...\n")
-  #     continue
-
-  #   if 0 <= x <= 2 and 0 <= y <= 2:
-  #     is_taken = board.move(y, x, current_player.token)
-  #     if is_taken == True:
-  #       continue
-  #     print(board)
-  #   else:
-  #     print("\nNot a valid move. Please try again...\n")
-  #     continue
-
-  #   current_round += 1
-
+main()
 

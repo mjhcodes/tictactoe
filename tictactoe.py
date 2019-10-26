@@ -25,37 +25,19 @@ class Game:
     else:
       self.board[x][y] = token
 
-  def calc_winner(self):
-    for x in range(len(self.board)):
-      if "X" in self.board[x][0] and "X" in self.board[x][1] and "X" in self.board[x][2]: #checking horizontal from 0,0 to 0,2
-        for j in range(len(self.board)):
-          if "X" in self.board[j][0] and "X" in self.board[j][1] and "X" in self.board[j][2]: #checking horizontal from 1,0 to 1,2
-            for k in range(len(self.board)):
-              if "X" in self.board[k][0] and "X" in self.board[k][1] and "X" in self.board[k][2]: #checking horizontal from 2,0 to 2,2
-                print("win")
-                quit()
+  def calc_winner(self, current_player):
 
-      # if "X" in self.board[x][0] and "X" in self.board[x][1] and "X" in self.board[x][2]: #checking horizontal from 0,0 to 0,2
+    # Alex - Horizontal 
 
-    
-            # for k in range(len(self.board)):
-            #   if "X" in self.board[k][0] and "X" in self.board[k][1] and "X" in self.board[k][2]:
-          
+    # Alex - Vertical
 
-      # print(self.board[x][x]
-    # match = 0
-    # for x in range(len(self.board)):
-    #   # if self.board[x] == self.board[x]:
-    #     match = match + 1
-    # print(match)
+    if (self.board[0][0] == self.board[1][1] == self.board[2][2]) and self.board[0][0] != ' ':
+      print(f"{current_player.token} is the winner! Congrats, {current_player}!\n")
+      quit()
 
-    # match = 0
-    # for x in range(3):
-    #   if self.board[x][y] == self.board[x][y]:
-    #     match = match + 1
-    #     if match == 3:
-    #       return True
-    pass
+    if (self.board[2][0] == self.board[1][1] == self.board[0][2]) and self.board[2][0] != ' ':
+      print(f"{current_player.token} is the winner! Congrats, {current_player}!\n")
+      quit()
       
   def is_full(self):
     """scans each row of the board and returns False, if any section is blank; otherwise, prints message and quits"""
@@ -65,9 +47,9 @@ class Game:
     print("No more moves available. Game over.\n")
     quit()
 
-  def is_game_over(self):
+  def is_game_over(self, current_player):
     """runs two methods to determine if game has concluded"""
-    return self.calc_winner() or self.is_full()
+    return self.calc_winner(current_player) or self.is_full()
 
 
 # - - - - - - - END CLASSES - - - - - - - -
@@ -96,8 +78,6 @@ def main():
 
   while True:
 
-    board.is_game_over()
-
     current_player = get_current_player(current_round, player_one, player_two)
 
     try:
@@ -115,6 +95,8 @@ def main():
     else:
       print("\nNot a valid move. Please try again...\n")
       continue
+
+    board.is_game_over(current_player)
 
     current_round += 1
 

@@ -33,8 +33,7 @@ class Game:
             for k in range(len(self.board)):
               if "X" in self.board[k][0] and "X" in self.board[k][1] and "X" in self.board[k][2]: #checking horizontal from 2,0 to 2,2
                 print("win")
-              else:
-                print("lost")
+                quit()
 
       # if "X" in self.board[x][0] and "X" in self.board[x][1] and "X" in self.board[x][2]: #checking horizontal from 0,0 to 0,2
 
@@ -81,25 +80,17 @@ def get_current_player(current_round, player_one, player_two):
   else:
     return player_one
 
-board = Game()
-player_one = Player("Alex", "X")
-player_two = Player("Matt", "O")
+def main():
+  board = Game()
 
-board.move(0, 0, "X")
-board.move(0, 1, "X")
-board.move(0, 2, "X")
-board.move(1, 0, "X")
-board.move(1, 1, "X")
-board.move(1, 2, "X")
-board.move(2, 0, "X")
-board.move(2, 1, "X")
-board.move(2, 2, "X")
+  name_one = input("\nPlayer One - You will be 'X': What is your name? ")
+  player_one = Player(name_one, "X")
 
+  name_two = input("Player Two - You will be 'O': What is your name? ")
+  player_two = Player(name_two, "O")
 
-# board.move(1, 0, "X")
-# board.move(0, 2, "Y")
-
-print(board)
+  print(f"\nOkay, {player_one.name} & {player_two.name}... let's play!")
+  print(f"\nHere's the board...\n{board}")
 
   current_round = 1
 
@@ -127,4 +118,6 @@ print(board)
 
     current_round += 1
 
+
+main()
 

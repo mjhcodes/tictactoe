@@ -94,8 +94,10 @@ def main():
 
   while True:
 
+    # alternates player each time through the loop
     current_player = get_current_player(current_round, player_one, player_two)
 
+    # ensures a number is inputted
     try:
       x = int(input(f"{current_player.name}, select your horizontal location (0-2): "))
       y = int(input(f"{current_player.name}, select your vertical location (0-2): "))
@@ -103,6 +105,7 @@ def main():
       print("\nNot a valid input. Please try again...\n")
       continue
 
+    # ensures inputted number is either 0, 1 or 2
     if 0 <= x <= 2 and 0 <= y <= 2:
       is_taken = board.move(y, x, current_player.token)
       if is_taken == True:
@@ -112,6 +115,7 @@ def main():
       print("\nNot a valid move. Please try again...\n")
       continue
 
+    # checks for either a winner or a full board
     board.is_game_over(current_player)
 
     current_round += 1
